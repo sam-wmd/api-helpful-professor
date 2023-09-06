@@ -1,6 +1,8 @@
 package com.sam.apihelpfulprofessor.controller;
 
+import com.sam.apihelpfulprofessor.dto.SearchResponseDto;
 import com.sam.apihelpfulprofessor.service.Langchain.LangChainService;
+import com.sam.apihelpfulprofessor.service.Milvus.MilvusService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,9 +20,18 @@ public class MainController {
 
     final LangChainService langChainService;
 
+    final MilvusService milvusService;
+
     @GetMapping("/ping")
     public ResponseEntity<?> ping(){
         return ResponseEntity.ok("Pong");
+    }
+
+    @GetMapping("/search-milvus")
+    public ResponseEntity<SearchResponseDto> semanticSearch(@RequestBody Map<String,String> request){
+
+        String question = request.get("query");
+        return ResponseEntity.ok(milvusService.search(question));
     }
 
     @GetMapping("/search-langchain")
