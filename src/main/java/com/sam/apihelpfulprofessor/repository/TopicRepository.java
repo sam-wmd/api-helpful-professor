@@ -1,5 +1,6 @@
 package com.sam.apihelpfulprofessor.repository;
 
+import com.sam.apihelpfulprofessor.dto.ExampleDto;
 import com.sam.apihelpfulprofessor.model.Topic;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.neo4j.repository.query.Query;
@@ -12,7 +13,9 @@ import java.util.List;
 public interface TopicRepository extends Neo4jRepository<Topic, Long>, QueryByExampleExecutor<Topic> {
 
 
-    @Query("MATCH (t:Topic) where t.title = ?1 return t")
+    @Query("MATCH (t:Topic {title: $title}) return t")
     Topic findByTitle(String title);
 
+    @Query("MATCH (ex:TopicExample)<-[:EXAMPLES]-(t:Topic {title:$title}) return ex.name as name, ex.description as description")
+    List<ExampleDto> findTopicExamples(String title);
 }

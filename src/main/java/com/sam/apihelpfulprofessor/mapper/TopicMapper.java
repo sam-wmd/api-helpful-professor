@@ -3,10 +3,9 @@ package com.sam.apihelpfulprofessor.mapper;
 import com.sam.apihelpfulprofessor.dto.TopicDto;
 import com.sam.apihelpfulprofessor.model.Topic;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Mapper(uses = {ExampleMapper.class})
 public interface TopicMapper {
@@ -16,4 +15,8 @@ public interface TopicMapper {
     TopicDto toDto(Topic topic);
 
     Topic toEntity(TopicDto dto);
+
+
+    List<Topic> topics(List<TopicDto> topicDtos);
+    List<TopicDto> topicDtos(List<Topic> topics);
 }

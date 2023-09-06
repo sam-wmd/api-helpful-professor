@@ -3,7 +3,7 @@ package com.sam.apihelpfulprofessor.controller;
 
 import com.sam.apihelpfulprofessor.dto.ExampleDto;
 import com.sam.apihelpfulprofessor.dto.TopicDto;
-import com.sam.apihelpfulprofessor.service.TopicService;
+import com.sam.apihelpfulprofessor.service.Topic.TopicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -39,18 +39,18 @@ public class TopicController {
     @GetMapping("/{title}/examples")
     public ResponseEntity<List<ExampleDto>> getExamples(@PathVariable String title){
         TopicDto topicDto = topicService.findTopicByTitle(title);
-        return ResponseEntity.ok(topicDto.examples());
+        return ResponseEntity.ok(topicDto.getExamples());
     }
 
     @GetMapping("/{title}/definition")
     public ResponseEntity<String> getDefinition(@PathVariable String title){
         TopicDto topicDto = topicService.findTopicByTitle(title);
-        return ResponseEntity.ok(topicDto.definition());
+        return ResponseEntity.ok(topicDto.getDefinition());
     }
 
     @GetMapping("/{title}/description")
     public ResponseEntity<String> getDescription(@PathVariable String title){
         TopicDto topicDto = topicService.findTopicByTitle(title);
-        return ResponseEntity.ok(topicDto.description());
+        return ResponseEntity.ok(topicDto.getDescription());
     }
 }

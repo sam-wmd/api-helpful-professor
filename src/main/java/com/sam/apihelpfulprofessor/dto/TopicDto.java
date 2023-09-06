@@ -6,11 +6,14 @@ import lombok.experimental.Accessors;
 
 import java.util.List;
 
-public record TopicDto (
-    String title,
-    String definition,
-    String description,
-    String category,
-    List<ExampleDto> examples
-)
-{ }
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+public class TopicDto
+{
+    String title;
+    String definition;
+    String description;
+    String category;
+    List<ExampleDto> examples;
+}
