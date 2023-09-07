@@ -1,6 +1,6 @@
 package com.sam.apihelpfulprofessor.service.Topic;
 
-import com.sam.apihelpfulprofessor.dto.ExampleDto;
+import com.sam.apihelpfulprofessor.dto.TopicExampleDto;
 import com.sam.apihelpfulprofessor.dto.TopicDto;
 import com.sam.apihelpfulprofessor.mapper.ExampleMapper;
 import com.sam.apihelpfulprofessor.mapper.TopicMapper;
@@ -42,7 +42,7 @@ public class TopicService {
 
     public TopicDto findTopicWithExamples(String title){
         TopicDto topic = topicMapper.toDto(topicRepository.findByTitle(title));
-        List<ExampleDto> examples = topicRepository.findTopicExamples(title);
+        List<TopicExampleDto> examples = topicRepository.findTopicExamples(title);
         topic.setExamples(examples);
         return topic;
 

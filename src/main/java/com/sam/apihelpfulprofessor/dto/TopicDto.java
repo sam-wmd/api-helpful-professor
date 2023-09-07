@@ -1,8 +1,6 @@
 package com.sam.apihelpfulprofessor.dto;
 
-import com.sam.apihelpfulprofessor.model.TopicExample;
 import lombok.*;
-import lombok.experimental.Accessors;
 
 import java.util.List;
 
@@ -15,5 +13,5 @@ public class TopicDto
     String definition;
     String description;
     String category;
-    List<ExampleDto> examples;
+    List<TopicExampleDto> examples;
 }

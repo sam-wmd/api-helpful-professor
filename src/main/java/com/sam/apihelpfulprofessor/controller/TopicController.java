@@ -1,7 +1,7 @@
 package com.sam.apihelpfulprofessor.controller;
 
 
-import com.sam.apihelpfulprofessor.dto.ExampleDto;
+import com.sam.apihelpfulprofessor.dto.TopicExampleDto;
 import com.sam.apihelpfulprofessor.dto.TopicDto;
 import com.sam.apihelpfulprofessor.service.Topic.TopicService;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +37,7 @@ public class TopicController {
     }
 
     @GetMapping("/{title}/examples")
-    public ResponseEntity<List<ExampleDto>> getExamples(@PathVariable String title){
+    public ResponseEntity<List<TopicExampleDto>> getExamples(@PathVariable String title){
         TopicDto topicDto = topicService.findTopicByTitle(title);
         return ResponseEntity.ok(topicDto.getExamples());
     }

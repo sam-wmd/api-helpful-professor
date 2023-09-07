@@ -1,6 +1,6 @@
 package com.sam.apihelpfulprofessor.mapper;
 
-import com.sam.apihelpfulprofessor.dto.ExampleDto;
+import com.sam.apihelpfulprofessor.dto.TopicExampleDto;
 import com.sam.apihelpfulprofessor.model.TopicExample;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -15,12 +15,12 @@ public interface ExampleMapper {
 
     @Mapping(source="name", target="name")
     @Mapping(source="description", target="description")
-    TopicExample toEntity(ExampleDto dto);
+    TopicExample toEntity(TopicExampleDto dto);
 
     @Mapping(source="name", target="name")
     @Mapping(source="description", target="description")
-    ExampleDto toDto(TopicExample example);
+    TopicExampleDto toDto(TopicExample example);
 
-    List<ExampleDto> toDtoList(List<TopicExample> examples);
-    List<TopicExample> toEntityList(List<ExampleDto> examples);
+    List<TopicExampleDto> toDtoList(List<TopicExample> examples);
+    List<TopicExample> toEntityList(List<TopicExampleDto> examples);
 }
