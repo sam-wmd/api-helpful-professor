@@ -60,7 +60,23 @@ services:
     depends_on:
       - "etcd"
       - "minio"
-
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rest-api
+    environment:
+      - OPENAI_TOKEN=
+      - NEO4J_URL=
+    volumes:
+      - "./src:/app/src"
+    ports:
+      - "8085:4444"
+      - "4444:80"
+    depends_on:
+      - "etcd"
+      - "minio"
+      - "standalone"
 networks:
   default:
-    name: milvus
+    name: app

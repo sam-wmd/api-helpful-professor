@@ -49,7 +49,7 @@ public class TopicService {
     }
     public TopicDto findTopicByTitle(String title){
         title = StringUtils.capitalize(title);
-        if (example instanceof Example<Topic>){
+        if (example != null){
             Topic topic = topicRepository.findOne(Example.of(example.getProbe().withTitle(title))).orElse(null);
             return topicMapper.toDto(topic);
         }
@@ -57,7 +57,12 @@ public class TopicService {
     }
 
     public List<TopicDto> getAllTopics(){
-        List<Topic> topics = IterableUtils.toList(topicRepository.findAll(example));
+        List<Topic> topics;
+        if (example == null) {
+            topics = IterableUtils.toList(topicRepository.findAll());
+        }else{
+            topics = IterableUtils.toList(topicRepository.findAll(example));
+        }
         return topics.stream().map(topicMapper::toDto).collect(Collectors.toList());
     }
 

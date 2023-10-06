@@ -46,7 +46,7 @@ public class LangChainService {
 
     @Autowired
     public LangChainService(@Value("${openaitoken}") String token,
-                            TopicRepository topicRepository) throws IOException {
+                            TopicRepository topicRepository) {
         this.OPENAI_TOKEN = token;
         CHAT_MODEL = OpenAiChatModel.withApiKey(OPENAI_TOKEN);
 
@@ -61,13 +61,13 @@ public class LangChainService {
     }
 
     @PostConstruct
-    public void buildEmbeddingStoreFromDb() throws IOException{
+    public void buildEmbeddingStoreFromDb() throws IOException {
         List<Topic> topics = topicRepository.findAll();
         buildEmbeddingStore(topics);
     }
 
 
-    public void buildEmbeddingStore(List<Topic> topics) throws IOException{
+    public void buildEmbeddingStore(List<Topic> topics) {
         ingestor = EmbeddingStoreIngestor.builder()
                 .splitter(new CustomSentenceSplitter())
                 .embeddingModel(EMBEDDING_MODEL)
@@ -89,8 +89,7 @@ public class LangChainService {
         // Load file and embed each object
         File file = new ClassPathResource(filename).getFile();
         ObjectMapper mapper = new ObjectMapper();
-        List<Topic> topics= mapper.readValue(file, new TypeReference<List<Topic>>() {});
-        return topics;
+        return mapper.readValue(file, new TypeReference<List<Topic>>() {});
     }
 
 
