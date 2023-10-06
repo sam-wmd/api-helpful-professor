@@ -7,13 +7,13 @@ import com.sam.apihelpfulprofessor.service.Topic.TopicService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class TopicController {
 
@@ -32,6 +32,7 @@ public class TopicController {
 
     @GetMapping("/{title}")
     public ResponseEntity<TopicDto> get(@PathVariable String title){
+        title = title.replaceAll("-"," ");
         TopicDto topicDto = topicService.findTopicByTitle(title);
         return ResponseEntity.ok(topicDto);
     }
